@@ -1,0 +1,30 @@
+{
+  "name": "emmas",
+  "version": "0.1.0",
+  "description": "emma's site",
+  "repository": "file://.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "static",
+    "site",
+    "gulp"
+  ],
+  "author": "thenrio",
+  "license": "MIT",
+  "dependencies": {
+    "gulp": "^3.9.0",
+    "gulp-data": "^1.2.0",
+    "gulp-front-matter": "^1.2.3",
+    "gulp-markdown": "^1.0.0",
+    "gulp-nunjucks": "^1.0.3",
+    "gulp-nunjucks-render": "^0.2.1",
+    "gulp-util": "^3.0.6",
+    "nunjucks": "^1.3.4",
+    "rimraf": "^2.4.2",
+    "slug": "^0.9.1",
+    "through2": "^2.0.0"
+  }
+}
