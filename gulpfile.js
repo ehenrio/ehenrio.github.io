@@ -3,7 +3,6 @@
 // globals
 // =======
 var 
-  debug = require( 'gulp-debug' ),
   frontmatter = require( 'gulp-front-matter' ),
   gulp = require( 'gulp' ),
   markdown = require( 'gulp-markdown' ),
@@ -17,7 +16,7 @@ var
 // and why is it more evil than a required module ?
 //
 var nunjucks = render.nunjucks
-nunjucks.configure( [ 'assets' ], { watch: false } )
+nunjucks.configure( './assets', { watch: false } )
 
 // evil globals, level II ( my own one )
 //
@@ -38,10 +37,28 @@ function may_be_add_basename_as_slug( vinyl ) {
   return vinyl
 }
 
+function may_be_add_resume( vinyl ) {
+  if( !vinyl.data.resume ) {
+    vinyl.data.slug = slugify( vinyl.data.title )
+  }
+  return vinyl
+}
+
+
 // tasks
 // =====
 gulp.task( 'clean', function ( cb ) {
-  rimraf( './site', cb )
+  return rimraf( './site', cb )
+})
+
+gulp.task( 'styles', function () {
+  return gulp.src( 'node_modules/bootstrap/dist/css/bootstrap.css' )
+    .pipe( gulp.dest( './site/styles' ) )
+})
+
+gulp.task( 'scripts', function () {
+  return gulp.src( [ 'node_modules/holderjs/holder.js' ] )
+    .pipe( gulp.dest( './site/scripts' ) )
 })
 
 gulp.task( 'posts', function () {
@@ -63,11 +80,11 @@ gulp.task( 'posts', function () {
     }))
 })
 
-gulp.task( 'html', [ 'posts' ], function () {
+gulp.task( 'site', [ 'posts' ], function () {
   return gulp.src( './assets/index.html' )
     .pipe( render( site ) )       // read from global II
     .pipe( gulp.dest( './site' ) )
 })
 
-gulp.task( 'build', [ 'html' ] )
+gulp.task( 'build', [ 'site', 'styles', 'scripts' ] )
 gulp.task( 'default', [ 'build' ] )

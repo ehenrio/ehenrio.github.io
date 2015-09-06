@@ -24,5 +24,13 @@ inspiration are
 inspired by
 ===========
 
-* [agile-france, 2015](https://github.com/agile-france/2015.git)
-* [danielnaab](https://github.com/danielnaab/wunderdog)
+build
+-----
+
+* https://github.com/agile-france/2015.git
+* https://github.com/danielnaab/wunderdog
+
+design
+------
+
+* http://simonfosterdesign.com/home/
