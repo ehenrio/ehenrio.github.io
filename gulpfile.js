@@ -71,6 +71,10 @@ gulp.task( 'posts', function () {
       f.path = path.join( f.base, f.data.slug + path.extname( f.path ) )
       cb( undefined, f )
     }))
+    .pipe( through2.obj( function ( f, _encoding, cb ) {
+      f.contents = new Buffer( nunjucks.render( 'post.html', { contents: f.contents } ) )
+      cb( undefined, f )
+    }))
     .pipe( gulp.dest( './site/posts' ) )
     .pipe( through2.obj( function ( f, _encoding, cb ) {
       // write to global II
