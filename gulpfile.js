@@ -56,6 +56,7 @@ function taint( site ) {
   return through2.obj( function ( f, _encoding, cb ) {
     // write to global II
     f.data.href = f.path
+    console.log( ">>>> " + JSON.stringify( f.data ) )
     site.posts.push( f.data )
     cb( undefined, f )
   })
@@ -67,14 +68,9 @@ gulp.task( 'clean', function ( cb ) {
   return rimraf( './site', cb )
 })
 
-gulp.task( 'styles', function () {
-  return gulp.src( 'node_modules/bootstrap/dist/css/bootstrap.css' )
-    .pipe( gulp.dest( './site/styles' ) )
-})
-
-gulp.task( 'scripts', function () {
-  return gulp.src( [ 'node_modules/holderjs/holder.js' ] )
-    .pipe( gulp.dest( './site/scripts' ) )
+gulp.task( 'images', function () {
+  return gulp.src( './contents/images/*.jpg' )
+    .pipe( gulp.dest( './site/images' ) )
 })
 
 gulp.task( 'posts', function () {
@@ -93,5 +89,17 @@ gulp.task( 'site', [ 'posts' ], function () {
     .pipe( gulp.dest( './site' ) )
 })
 
-gulp.task( 'build', [ 'site', 'styles', 'scripts' ] )
+gulp.task( 'scripts', function () {
+  return gulp.src( [ 'node_modules/holderjs/holder.js' ] )
+    .pipe( gulp.dest( './site/scripts' ) )
+})
+
+gulp.task( 'styles', function () {
+  return gulp.src( 'node_modules/bootstrap/dist/css/bootstrap.css' )
+    .pipe( gulp.dest( './site/styles' ) )
+})
+
+// omakase
+// =======
+gulp.task( 'build', [ 'images', 'site', 'scripts', 'styles' ] )
 gulp.task( 'default', [ 'build' ] )
