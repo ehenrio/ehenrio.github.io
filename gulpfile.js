@@ -16,7 +16,7 @@ var
 // and why is it more evil than a required module ?
 //
 var nunjucks = render.nunjucks
-nunjucks.configure( './assets/views', { watch: false } )
+nunjucks.configure( '.', { watch: false } )
 
 // evil globals, level II ( my own one )
 //
@@ -47,7 +47,7 @@ function rename_to_slug() {
 
 function layout() {
   return through2.obj( function ( f, _encoding, cb ) {
-    f.contents = new Buffer( nunjucks.render( 'post.html', { contents: f.contents } ) )
+    f.contents = new Buffer( nunjucks.render( './assets/views/post.html', { contents: f.contents } ) )
     cb( undefined, f )
   })
 }

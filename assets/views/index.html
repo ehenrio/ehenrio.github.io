@@ -1,10 +1,10 @@
-{% extends "layouts/page.html" %}
+{% extends "assets/views/layouts/page.html" %}
 
 {% block body %}
   <div class="container marketing">
     <hr class="featurette-divider">
     {% for post in posts %}
-      {% include "_post.html" %} 
+      {% include "assets/views/_post.html" %} 
       <hr class="featurette-divider">
     {% endfor %} 
   </div>
