@@ -24,41 +24,44 @@ var site = {
   posts: []
 }
 
-// helpers
-// =======
-function may_be_add_title_as_slug( vinyl ) {
-  if( !vinyl.data.slug ) {
-    vinyl.data.slug = slug( vinyl.data.title )
-  }
-  return vinyl
-}
-
 // vinyl streams
 // =============
 function rename_to_slug() {
-  return through2.obj( function ( f, _encoding, cb ) {
+  return through2.obj( function ( vinyl, _encoding, cb ) {
     // slug is slug or slug( title )
-    may_be_add_title_as_slug( f )
+    if( !vinyl.data.slug ) {
+      vinyl.data.slug = slug( vinyl.data.title )
+    }
     // rename basename to slug
-    f.path = path.join( f.base, f.data.slug + path.extname( f.path ) )
-    cb( undefined, f )
+    vinyl.path = path.join( vinyl.base, vinyl.data.slug + path.extname( vinyl.path ) )
+    cb( undefined, vinyl )
+  })
+}
+
+function may_be_add_thumbnail_as_thumbnail_style() {
+  return through2.obj( function ( vinyl, _encoding, cb ) {
+    if ( !vinyl.data.thumbnail_style ) {
+      var thumbnail = vinyl.data.thumbnail
+      vinyl.data.thumbnail_style = path.basename( thumbnail, path.extname( thumbnail ) )
+    }
+    cb( undefined, vinyl )
   })
 }
 
 function layout() {
-  return through2.obj( function ( f, _encoding, cb ) {
-    f.contents = new Buffer( nunjucks.render( './assets/views/post.html', { contents: f.contents } ) )
-    cb( undefined, f )
+  return through2.obj( function ( vinyl, _encoding, cb ) {
+    vinyl.contents = new Buffer( nunjucks.render( './assets/views/post.html', { contents: vinyl.contents } ) )
+    cb( undefined, vinyl )
   })
 }
 
 function taint( site ) {
-  return through2.obj( function ( f, _encoding, cb ) {
+  return through2.obj( function ( vinyl, _encoding, cb ) {
+    vinyl.data.href = vinyl.path
+    console.log( ">>>> " + JSON.stringify( vinyl.data ) )
     // write to global II
-    f.data.href = f.path
-    console.log( ">>>> " + JSON.stringify( f.data ) )
-    site.posts.push( f.data )
-    cb( undefined, f )
+    site.posts.push( vinyl.data )
+    cb( undefined, vinyl )
   })
 }
 
