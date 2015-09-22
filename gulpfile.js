@@ -16,7 +16,7 @@ var
 // and why is it more evil than a required module ?
 //
 var nunjucks = render.nunjucks
-nunjucks.configure( './assets', { watch: false } )
+nunjucks.configure( './assets/views', { watch: false } )
 
 // evil globals, level II ( my own one )
 //
@@ -84,7 +84,7 @@ gulp.task( 'posts', function () {
 })
 
 gulp.task( 'site', [ 'posts' ], function () {
-  return gulp.src( './assets/index.html' )
+  return gulp.src( './assets/views/index.html' )
     .pipe( render( site ) )       // read from global II
     .pipe( gulp.dest( './site' ) )
 })
