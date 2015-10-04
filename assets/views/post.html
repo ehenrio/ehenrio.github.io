@@ -1,5 +1,16 @@
 {% extends "assets/views/layouts/page.html" %}
 
-{% block body %}
-{{ contents }}
+{% block styles %}
+<link rel="stylesheet" href="../styles/bootstrap.css">
+<link rel="stylesheet" href="../styles/emma.css">
 {% endblock %}
+
+{% block body %}
+<article class="container" >
+  <div class="jumbotron text-center">
+{{ contents }}
+  </div>
+</article>
+{% endblock %}
+
+
