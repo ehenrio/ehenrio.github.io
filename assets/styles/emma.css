@@ -1,0 +1,15 @@
+.project {
+  float: left;
+  width: 33.333%;
+  padding: .75rem;
+  margin-bottom: 2rem;
+  border: 0;
+}
+
+.project > a > img {
+  margin-bottom: 1rem;
+}
+
+.project-resume {
+  font: 0.8em sans-serif;
+}

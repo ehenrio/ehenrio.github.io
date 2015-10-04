@@ -1,11 +1,9 @@
-<div class="row featurette">
-  <div class="col-md-5">
-    <a href="{{ post.href }}">
-      <h2 class="featurette-heading">{{ post.title }}</h2>
-    </a>
-    <p class="lead">{{ post.contents }}</p>
-  </div>
-  <div class="col-md-7">
-    <img class="featurette-image img-fluid center-block" src="{{ post.thumbnail }}">
-  </div>
+<div class="project">
+  <a href="{{ post.href }}">
+  <img class="img-fluid center-block" src="{{ post.thumbnail }}">
+  </a>
+  <a href="{{ post.href }}">
+    <h3 class="project-title">{{ post.title }}</h3>
+  </a>
+  <p class="project-resume">{{ post.resume }}</p>
 </div>

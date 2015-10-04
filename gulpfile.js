@@ -26,6 +26,20 @@ var site = {
 
 // vinyl streams
 // =============
+function may_be_add_resume() {
+  return through2.obj( function ( vinyl, _encoding, cb ) {
+    // resume is resume or first 64 chars of body
+    if( !vinyl.data.resume ) {
+      var resume = vinyl.contents.slice( 0, 64 ).toString() 
+      if ( resume.length >= 64 ) {
+        resume = resume.slice( 0, 61 ) + "..."
+      }
+      vinyl.data.resume = resume 
+    }
+    cb( undefined, vinyl )
+  })
+}
+
 function rename_to_slug() {
   return through2.obj( function ( vinyl, _encoding, cb ) {
     // slug is slug or slug( title )
@@ -34,16 +48,6 @@ function rename_to_slug() {
     }
     // rename basename to slug
     vinyl.path = path.join( vinyl.base, vinyl.data.slug + path.extname( vinyl.path ) )
-    cb( undefined, vinyl )
-  })
-}
-
-function may_be_add_thumbnail_as_thumbnail_style() {
-  return through2.obj( function ( vinyl, _encoding, cb ) {
-    if ( !vinyl.data.thumbnail_style ) {
-      var thumbnail = vinyl.data.thumbnail
-      vinyl.data.thumbnail_style = path.basename( thumbnail, path.extname( thumbnail ) )
-    }
     cb( undefined, vinyl )
   })
 }
@@ -58,7 +62,6 @@ function layout() {
 function taint( site ) {
   return through2.obj( function ( vinyl, _encoding, cb ) {
     vinyl.data.href = vinyl.path
-    console.log( ">>>> " + JSON.stringify( vinyl.data ) )
     // write to global II
     site.posts.push( vinyl.data )
     cb( undefined, vinyl )
@@ -79,6 +82,7 @@ gulp.task( 'images', function () {
 gulp.task( 'posts', function () {
   return gulp.src( './contents/posts/*.md' )
     .pipe( frontmatter( { property: 'data' } ) )
+    .pipe( may_be_add_resume() )
     .pipe( rename_to_slug() )
     .pipe( markdown() )
     .pipe( layout() )
@@ -97,8 +101,13 @@ gulp.task( 'scripts', function () {
     .pipe( gulp.dest( './site/scripts' ) )
 })
 
+// styles are bunch of files, could be concat
+//
 gulp.task( 'styles', function () {
-  return gulp.src( 'node_modules/bootstrap/dist/css/bootstrap.css' )
+  return gulp.src([
+    'node_modules/bootstrap/dist/css/bootstrap.css',
+    'assets/styles/*.css'
+    ])
     .pipe( gulp.dest( './site/styles' ) )
 })
 
