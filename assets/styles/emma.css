@@ -4,6 +4,11 @@
   padding: .75rem;
   margin-bottom: 2rem;
   border: 0;
+  overflow: auto;
+}
+
+.project:nth-child( 3n+1 ) {
+  clear: left;
 }
 
 .project > a > img {
