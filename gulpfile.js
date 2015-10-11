@@ -21,7 +21,7 @@ nunjucks.configure( '.', { watch: false } )
 // evil globals, level II ( my own one )
 //
 var site = {
-  posts: []
+  projects: []
 }
 
 // vinyl streams
@@ -54,7 +54,7 @@ function rename_to_slug() {
 
 function layout() {
   return through2.obj( function ( vinyl, _encoding, cb ) {
-    vinyl.contents = new Buffer( nunjucks.render( './assets/views/post.html', { contents: vinyl.contents } ) )
+    vinyl.contents = new Buffer( nunjucks.render( './assets/views/project.html', { contents: vinyl.contents } ) )
     cb( undefined, vinyl )
   })
 }
@@ -63,7 +63,7 @@ function taint( site ) {
   return through2.obj( function ( vinyl, _encoding, cb ) {
     vinyl.data.href = vinyl.path
     // write to global II
-    site.posts.push( vinyl.data )
+    site.projects.push( vinyl.data )
     cb( undefined, vinyl )
   })
 }
@@ -79,18 +79,21 @@ gulp.task( 'images', function () {
     .pipe( gulp.dest( './site/images' ) )
 })
 
-gulp.task( 'posts', function () {
-  return gulp.src( './contents/posts/*.md' )
+gulp.task( 'projects', function () {
+  // projects name SHOULD have format YYYY-MM-DD-anything.md
+  // the date part provides date in front matter
+  //
+  return gulp.src( './contents/projects/*.md' )
     .pipe( frontmatter( { property: 'data' } ) )
     .pipe( may_be_add_resume() )
     .pipe( rename_to_slug() )
     .pipe( markdown() )
     .pipe( layout() )
-    .pipe( gulp.dest( './site/posts' ) )
+    .pipe( gulp.dest( './site/projects' ) )
     .pipe( taint( site ) )
 })
 
-gulp.task( 'site', [ 'posts' ], function () {
+gulp.task( 'site', [ 'projects' ], function () {
   return gulp.src( './assets/views/index.html' )
     .pipe( render( site ) )       // read from global II
     .pipe( gulp.dest( './site' ) )
