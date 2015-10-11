@@ -42,9 +42,9 @@ function may_be_add_resume() {
 
 function rename_to_slug() {
   return through2.obj( function ( vinyl, _encoding, cb ) {
-    // slug is slug or slug( title )
+    // slug is slug or slug( title )... downcase
     if( !vinyl.data.slug ) {
-      vinyl.data.slug = slug( vinyl.data.title )
+      vinyl.data.slug = slug( vinyl.data.title ).toLowerCase()
     }
     // rename basename to slug
     vinyl.path = path.join( vinyl.base, vinyl.data.slug + path.extname( vinyl.path ) )
@@ -75,7 +75,7 @@ gulp.task( 'clean', function ( cb ) {
 })
 
 gulp.task( 'images', function () {
-  return gulp.src( './contents/images/*.jpg' )
+  return gulp.src( './contents/images/**/*.jpg' )
     .pipe( gulp.dest( './site/images' ) )
 })
 
