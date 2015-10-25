@@ -1,7 +1,9 @@
 ---
-title:      T3 future, Saint Maudan
-thumbnail:  images/t3-dark-coating.jpg 
+title:      Saint Maudan
+thumbnail:  images/t3-dark-coating.jpg
 
 ---
 
-Magnifique
+Construction de deux logements à Saint Maudan
+
+Maître d'ouvrage
