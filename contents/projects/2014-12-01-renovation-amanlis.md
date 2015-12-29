@@ -1,6 +1,6 @@
 ---
 title:      Amanlis
-thumbnail:  images/maison-valerie/IMGP0622.jpg
+thumbnail:  images/renovation-amanlis/IMAG0038.jpg
 
 ---
 Rénovation d'une longère

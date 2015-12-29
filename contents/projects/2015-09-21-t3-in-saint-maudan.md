@@ -1,6 +1,6 @@
 ---
 title:      Saint Maudan
-thumbnail:  images/t3-dark-coating.jpg
+thumbnail:  images/saint-maudan/PERS041013.jpg
 
 ---
 
