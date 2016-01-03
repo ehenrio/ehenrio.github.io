@@ -80,7 +80,7 @@ gulp.task( 'images', function () {
 })
 
 gulp.task( 'projects', function () {
-  // projects name SHOULD have format YYYY-MM-DD-anything.md
+  // projects name MUST have format YYYY-MM-DD-anything.md
   // the date part provides date in front matter
   //
   return gulp.src( './contents/projects/*.md' )

@@ -1,11 +1,11 @@
 {% extends "assets/views/layouts/page.html" %}
 
 {% block body %}
-  <div class="container">
-    <div class="row">
-      {% for project in projects | reverse %}
-        {% include "assets/views/_project.html" %} 
-      {% endfor %} 
-    </div>
-  </div>
+  <ul id="projects">
+  {% for project in projects | reverse %}
+    <li class="project">
+      {% include "assets/views/_project.html" %}
+    </li>
+  {% endfor %}
+  </ul>
 {% endblock %}

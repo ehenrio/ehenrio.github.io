@@ -1,13 +1,39 @@
-.project {
-  float: left;
-  width: 33.333%;
-  padding: .75rem;
-  border: 0;
-  overflow: auto;
+/* stolen from bootstrap */
+*,
+*:before,
+*:after {
+	box-sizing: border-box;
 }
 
-.project:nth-child( 3n+1 ) {
-  clear: left;
+body {
+  line-height:1.6;
+}
+
+/* stolen from bootstrap */
+.center-block {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.header {
+  padding: 6em 3em;
+}
+
+header > h1 {
+  text-align: center;
+}
+
+/* stolen from bootstrap */
+.img-fluid {
+  display: block;
+	max-width: 100%;
+	height: auto;
+}
+
+.project {
+  flex: 0 0 33.3333%;
+  padding: 1rem;
 }
 
 .project > a > img {
@@ -16,4 +42,15 @@
 
 .project-resume {
   font: 0.8em sans-serif;
+}
+
+#projects {
+  display: flex;
+  flex-wrap: wrap;
+	justify-content: flex-start;
+  width:100%;
+}
+
+ul {
+  list-style: none;
 }
