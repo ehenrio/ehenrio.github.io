@@ -99,11 +99,6 @@ gulp.task( 'site', [ 'projects' ], function () {
     .pipe( gulp.dest( './site' ) )
 })
 
-gulp.task( 'scripts', function () {
-  return gulp.src( [ 'node_modules/holderjs/holder.js' ] )
-    .pipe( gulp.dest( './site/scripts' ) )
-})
-
 // styles are bunch of files, could be concat
 //
 gulp.task( 'styles', function () {
@@ -116,5 +111,5 @@ gulp.task( 'styles', function () {
 
 // omakase
 // =======
-gulp.task( 'build', [ 'images', 'site', 'scripts', 'styles' ] )
+gulp.task( 'build', [ 'images', 'site', 'styles' ] )
 gulp.task( 'default', [ 'build' ] )
