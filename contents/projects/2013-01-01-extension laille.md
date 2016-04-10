@@ -1,9 +1,19 @@
 ---
-title:      Saint Maudan
-thumbnail:  images/saint-maudan/PERS041013.jpg
+title:      Extension - 35890 Laillé
+thumbnail:  images/extension-laille/IMGP1560.jpg
 
 ---
 
-Construction de deux logements à Saint Maudan
+Extension d'une maison individuelle en centre ancien
 
-Maître d'ouvrage
+Maître d'ouvrage : Privée
+
+Coût des travaux : 65000€ HT
+
+Livraison Janvier 2014
+
+Principe constructif ossature bois
+chauffage poêle bois
+
+Existant
+![existant](../P1040068.jpg)
